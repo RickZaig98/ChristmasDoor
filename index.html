@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Greeting</title>
+    <style>
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Background with Christmas pattern */
+        body {
+            background-color: #2e2e2e;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Christmas pattern container */
+        .christmas-pattern {
+            background: url('https://raw.githubusercontent.com/RickZaig98/ChristmasDoor/refs/heads/main/background.png'); /* Add your custom Christmas pattern URL here */
+            background-size: cover;
+            background-repeat: repeat;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 45px;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            color: #ffda79;
+        }
+
+        /* Input Container Styling */
+        .input-container {
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px dashed #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            display: inline-block;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Input Styling */
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 10px 20px;
+            background-color: #ff6347;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #e55337;
+        }
+
+        /* Christmas Lights animation */
+        @keyframes lights {
+            0% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        .christmas-light {
+            position: absolute;
+            top: -10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: lights 5s infinite linear;
+        }
+
+        .christmas-light:nth-child(odd) {
+            animation-duration: 6s;
+            left: 10%;
+            background-color: red;
+            animation-delay: -2s;
+        }
+
+        .christmas-light:nth-child(2n) {
+            animation-duration: 7s;
+            left: 50%;
+            background-color: green;
+            animation-delay: -3s;
+        }
+
+        .christmas-light:nth-child(3n) {
+            animation-duration: 8s;
+            left: 70%;
+            background-color: yellow;
+            animation-delay: -1s;
+        }
+
+        .christmas-light:nth-child(4n) {
+            animation-duration: 9s;
+            left: 30%;
+            background-color: blue;
+            animation-delay: -4s;
+        }
+
+        .christmas-light:nth-child(5n) {
+            animation-duration: 6s;
+            left: 80%;
+            background-color: purple;
+            animation-delay: -3s;
+        }
+
+        /* Custom Message Styling */
+        .message {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffda79;
+            margin-top: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="christmas-pattern">
+        <h1>It's Christmas Time! 🎅🎄</h1>
+        <div class="input-container">
+            <h2>Enter Your Name</h2>
+            <input type="text" id="nameInput" placeholder="Your Name">
+            <br>
+            <button onclick="showMessage()">Submit</button>
+        </div>
+        <div class="message" id="customMessage"></div>
+    </div>
+
+    <script>
+        // Christmas Lights generation script with more dramatic random sizes
+        const lightsContainer = document.querySelector('.christmas-pattern');
+
+        for (let i = 0; i < 50; i++) {
+            const light = document.createElement('div');
+            light.classList.add('christmas-light');
+            
+            // Random size for each light (between 10px and 100px)
+            const size = Math.random() * 90 + 10; // Random size between 10px and 100px
+            light.style.width = `${size}px`;
+            light.style.height = `${size}px`;
+            
+            lightsContainer.appendChild(light);
+        }
+
+        // Array of funny Christmas puns
+        const puns = [
+            "You sleigh me, {name}! 🎁",
+            "Yule be the life of the party, {name}! ✨",
+            "Hope you have a tree-mendously merry Christmas, {name}! 🎄",
+            "Santa's got nothing on you, {name}! 🎅"
+        ];
+
+        // Function to show custom message based on user input
+        function showMessage() {
+            const name = document.getElementById('nameInput').value;
+
+            if (name === '') {
+                document.getElementById('customMessage').textContent = 'Please enter your name.';
+            } else {
+                const randomPun = puns[Math.floor(Math.random() * puns.length)];
+                document.getElementById('customMessage').textContent = randomPun.replace('{name}', name);
+            }
+        }
+    </script>
+
+</body>
+</html>
